@@ -24,7 +24,17 @@ export const Theme = createTheme({
     },
 
     typography: {
-        "fontFamily": "Poppins",
+        headerText: {
+            "fontSize": 18
+        },
+        title1: {
+            "fontSize" : 14
+        },
+        title2: {
+            "fontSize" : 12
+        },
+        "fontFamily": "system-ui",
+        
         "fontSize": 18,
         "fontWeightLight": 300,
         "fontWeightRegular": 400,

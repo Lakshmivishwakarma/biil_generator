@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import axios from "axios";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../Redux/Actions/Action';
 import { useDispatch } from 'react-redux';
 import styles from './style';
@@ -28,7 +28,7 @@ function Copyright(props) {
     );
 }
 export default function SignIn() {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
     const handleSubmit = async (event) => {
@@ -49,7 +49,7 @@ export default function SignIn() {
                 let user = response.data.response
                 console.log(user);
                 dispatch(signIn(user))
-                // navigate("/bills/create")
+                navigate("/bills/create")
             })
     };
 

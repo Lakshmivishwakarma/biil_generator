@@ -16,7 +16,7 @@ const styles = {
     GridTitle: {
         justifyContent: "center",
         alignItems: "center",
-        // border: "1px solid grey"
+    
       
     },
     Features: {

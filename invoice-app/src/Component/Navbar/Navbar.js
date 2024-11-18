@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { signIn } from '../../Redux/Actions/Action';
-import { TfiWrite } from "react-icons/tfi";
-import { BiMobileAlt } from "react-icons/bi";
+import { RiBillLine } from "react-icons/ri";
 import Avatar from '@mui/material/Avatar';
 import styles from "./style";
 
@@ -75,36 +74,28 @@ export default function Navbar() {
                   style={styles.Button}
                   id="basic-button"
                   onClick={handleClick}>
-                  <TfiWrite size={30} />
+                  <RiBillLine size={30} />
                 </Button>
               </Typography>
-              <Button
-                style={styles.Button}
-                color="inherit"
-                id="basic-button"
-                onClick={handleCreateBillsClick}
-              >
-                <BiMobileAlt /> Try Mobile App
-              </Button>
-              <Button
-                style={styles.Button}
-                color="inherit"
-                id="basic-button"
-                onClick={handleCreateBillsClick}
-              >
-                Create Bills
-              </Button>
-              <Button
-                style={styles.Button}
-                color="inherit"
-                id="basic-button"
-                onClick={handleViewBillsClick}
+              {userName ? (<>
+                <Button
+                  style={styles.Button}
+                  color="inherit"
+                  id="basic-button"
+                  onClick={handleCreateBillsClick}
+                >
+                  Create Bills
+                </Button>
+                <Button
+                  style={styles.Button}
+                  color="inherit"
+                  id="basic-button"
+                  onClick={handleViewBillsClick}
 
-              >
-                View Bills
-              </Button>
-
-
+                >
+                  View Bills
+                </Button>
+              </>): ("")}
 
               {userName ?
                 (
