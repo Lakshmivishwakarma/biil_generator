@@ -22,7 +22,7 @@ export default function NewCreateBill() {
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const year = currentDate.getFullYear();
     const formattedDate = `${day}-${month}-${year}`;
-
+    const viewBills = process.env.REACT_APP_API_BILL_DETAILS
     console.log(formattedDate);
     const dispatch = useDispatch();
 
@@ -82,7 +82,7 @@ export default function NewCreateBill() {
 
         dispatch(billDetails(billData))
 
-        await axios.post(`http://localhost:4000/billdetails`,
+        await axios.post(viewBills,
             billData, { responseType: 'blob' })
             .then((response) => {
                 console.log(response);

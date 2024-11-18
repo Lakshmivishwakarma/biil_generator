@@ -29,6 +29,7 @@ function Copyright(props) {
 }
 export default function SignIn() {
     const navigate = useNavigate()
+console.log(process.env.REACT_APP_API_URL);
 
     const dispatch = useDispatch();
     const handleSubmit = async (event) => {
@@ -43,7 +44,7 @@ export default function SignIn() {
         console.log(loginData);
        
 
-        await axios.post(`http://localhost:4000/signin`,
+        await axios.post(`${process.env.REACT_APP_API_URL}signin`,
             loginData)
             .then((response) => {
                 let user = response.data.response

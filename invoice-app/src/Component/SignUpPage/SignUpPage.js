@@ -18,7 +18,7 @@ function SignUp() {
     const navigate = useNavigate()
     const password = useRef({});
     password.current = watch("password", "");
-
+    const signUpUrl = process.env.REACT_APP_SIGNUP_API;
 
     async function onSubmit(data) {
         console.log(data);
@@ -27,7 +27,7 @@ function SignUp() {
             state: stateValues.state1
         };
         console.log(formData);
-        await axios.post(`http://localhost:4000/register`,
+        await axios.post(`${process.env.REACT_APP_API_URL}register`,
             formData)
             .then((response) => {
                 console.log(response.message);

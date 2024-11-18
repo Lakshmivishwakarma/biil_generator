@@ -26,7 +26,7 @@ export default function ViewBill() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/viewBillList');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}viewBillList`);
         setData(response.data);
 
       } catch (error) {
@@ -41,7 +41,7 @@ export default function ViewBill() {
   // printing bill pdf from list
   async function printPdf(invoiceNumber) {
     await axios
-      .get(`http://localhost:4000/generatePdf/${invoiceNumber}`, { responseType: 'blob' })
+      .get(`${process.env.REACT_APP_API_URL}generatePdf/${invoiceNumber}`, { responseType: 'blob' })
       .then(response => {
         saveAs(response.data, `${invoiceNumber}.pdf`);
 
@@ -57,7 +57,7 @@ export default function ViewBill() {
   async function handleViewBill(invoiceNumber) {
     console.log(invoiceNumber);
     try {
-      const response = await axios.get(`http://localhost:4000/viewPdf/${invoiceNumber}`, { responseType: 'blob' });
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/viewPdf/${invoiceNumber}`, { responseType: 'blob' });
       const file = new Blob([response.data], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);
       setUrl(fileURL);
