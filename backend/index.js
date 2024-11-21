@@ -5,6 +5,8 @@ const port = 4000;
 import cors from "cors";
 import dbConnect from './database/db_service.js';
 import router from './Router/auth.router.js';
+import dotenv from 'dotenv'
+dotenv.config();
 
 // import createInvoice from "./createInvoice.js"
 app.use(cors({
@@ -17,7 +19,7 @@ app.use(express.json())
 app.set('view engine', 'ejs');
 
 // Connect to the database
-const db = await dbConnect();
+const db = await dbConnect(process.env.DB_URL);
 
 // Pass the database connection to your routes 
 app.use((req, res, next) => {

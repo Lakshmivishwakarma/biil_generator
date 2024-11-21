@@ -1,8 +1,7 @@
 import { MongoClient, ObjectId } from "mongodb";
-const url = 'mongodb://127.0.0.1:27017';
-const client = new MongoClient(url);
 
-const dbConnect = async () => {
+const dbConnect = async (url) => {
+    const client = new MongoClient(url);
     let connection = await client.connect();
     let db = connection.db('billing_db')
     console.log("connection successful");
@@ -12,4 +11,3 @@ const dbConnect = async () => {
 const getObjectId = (id) => ObjectId(id)
 
 export default dbConnect;
-
