@@ -10,7 +10,7 @@ In the project directory, you can run:
 ### `Process`
 
 ### Sample output of this app
-![Bills pdf View](LA66776.pdf)
+[Bills pdf View](LA66776.pdf)
 
 
 Sign-up page
