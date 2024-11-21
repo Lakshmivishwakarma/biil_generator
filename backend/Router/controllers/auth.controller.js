@@ -1,3 +1,5 @@
+// import dbConnect from "../../database/db_service";
+
 const signIn = async (req, res) => {
 
     try {
@@ -24,7 +26,7 @@ const register = async (req, res) => {
     const data = req.body;
 
     console.log(data)
-    let db = await dbConnect();
+    // let db = await dbConnect();
 
     try {
         let dbResponse = req.db.collection("users").insertOne(data);
