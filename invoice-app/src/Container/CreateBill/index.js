@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 import { useDispatch } from 'react-redux';
 import { billDetails } from '../../Redux/Actions/Action';
 import { requiredField, namePattern, emailPattern } from '../../Error';
+import {api_url} from "../../constants";
 
 export default function NewCreateBill() {
 
@@ -81,7 +82,7 @@ export default function NewCreateBill() {
 
         dispatch(billDetails(billData))
 
-        await axios.post(`${process.env.REACT_APP_API_URL}billdetails`,
+        await axios.post(`${api_url}billdetails`,
             billData, { responseType: 'blob' })
             .then((response) => {
                 console.log(response);

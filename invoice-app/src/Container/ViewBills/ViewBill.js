@@ -12,6 +12,7 @@ import { MdAddCircleOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import {api_url} from "../../constants";
 
 export default function ViewBill() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function ViewBill() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}viewBillList`);
+        const response = await axios.get(`${api_url}viewBillList`);
         setData(response.data);
 
       } catch (error) {
@@ -41,7 +42,7 @@ export default function ViewBill() {
   // printing bill pdf from list
   async function printPdf(invoiceNumber) {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}generatePdf/${invoiceNumber}`, { responseType: 'blob' })
+      .get(`${api_url}generatePdf/${invoiceNumber}`, { responseType: 'blob' })
       .then(response => {
         saveAs(response.data, `${invoiceNumber}.pdf`);
 
@@ -57,7 +58,7 @@ export default function ViewBill() {
   async function handleViewBill(invoiceNumber) {
     console.log(invoiceNumber);
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/viewPdf/${invoiceNumber}`, { responseType: 'blob' });
+      const response = await axios.get(`${api_url}viewPdf/${invoiceNumber}`, { responseType: 'blob' });
       const file = new Blob([response.data], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);
       setUrl(fileURL);

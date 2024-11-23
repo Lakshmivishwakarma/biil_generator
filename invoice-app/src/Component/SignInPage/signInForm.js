@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../Redux/Actions/Action';
 import { useDispatch } from 'react-redux';
 import styles from './style';
-
+import {api_url} from "../../constants";
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -29,7 +29,7 @@ function Copyright(props) {
 }
 export default function SignIn() {
     const navigate = useNavigate()
-console.log(process.env.REACT_APP_API_URL);
+    console.log(api_url);
 
     const dispatch = useDispatch();
     const handleSubmit = async (event) => {
@@ -42,9 +42,9 @@ console.log(process.env.REACT_APP_API_URL);
         ;
 
         console.log(loginData);
-       
 
-        await axios.post(`${process.env.REACT_APP_API_URL}signin`,
+
+        await axios.post(`${api_url}signin`,
             loginData)
             .then((response) => {
                 let user = response.data.response

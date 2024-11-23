@@ -9,7 +9,7 @@ import { requiredField, namePattern, emailPattern } from '../../Error';
 import axios from "axios";
 import { useState, useRef } from 'react';
 import State from '../../Container/State/State';
-// import Dropdown from '../../Container/State/State';
+import {api_url} from "../../constants";
 
 function SignUp() {
     const [stateValues, setStateValues] = useState({}); // State object to store the selected state values
@@ -26,7 +26,7 @@ function SignUp() {
             state: stateValues.state1
         };
         console.log(formData);
-        await axios.post(`${process.env.REACT_APP_API_URL}register`,
+        await axios.post(`${api_url}register`,
             formData)
             .then((response) => {
                 console.log(response.message);
