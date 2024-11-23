@@ -18,7 +18,6 @@ function SignUp() {
     const navigate = useNavigate()
     const password = useRef({});
     password.current = watch("password", "");
-    const signUpUrl = process.env.REACT_APP_SIGNUP_API;
 
     async function onSubmit(data) {
         console.log(data);
