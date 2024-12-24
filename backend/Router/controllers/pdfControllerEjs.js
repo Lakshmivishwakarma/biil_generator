@@ -1,22 +1,33 @@
-import { ObjectId } from "mongodb";
-import ejs from 'ejs';
-import fs from 'fs';
-import pdf from 'html-pdf';
+import { ObjectId } from 'mongodb'
+import { generatePdf } from '../services/pdf_utility.service.js';
 
 const pdfControllerEjs = async (req, res) => {
-    console.log(req);
-    const invoiceNumber = req.params.id;
+    const id = req.params;
+
     try {
-        fs.readFile(`public/bills/${invoiceNumber}.pdf`, function (err, data) {
-            res.contentType('application/pdf');
-            res.send(data);
+        const data = await req.db.collection('bill_details').findOne({ '_id': new ObjectId(id) });
+        const invoiceNumber = data.invoiceNumber
+        const result = generatePdf(data);
+        result.toStream((err, stream) => {
             if (err) {
-                console.error(err)
-                return
+                console.error('Failed to generate PDF', err);
+                return res.status(500).send('Failed to generate PDF');
             }
 
-            console.log(data)
+            // Set response headers for the PDF
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', `inline; filename="${invoiceNumber}.pdf"`);
+
+            // Pipe the PDF stream directly to the response
+            stream.pipe(res);
+
+            // Handle any errors while streaming the PDF
+            stream.on('error', (error) => {
+                console.error('Failed to stream PDF', error);
+                res.status(500).send('Failed to generate PDF');
+            });
         });
+
 
     } catch (error) {
         console.log(error)

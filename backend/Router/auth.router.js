@@ -10,12 +10,11 @@ import { viewBillListController } from "./controllers/viewBillsListController.js
 import pdfControllerEjs from './controllers/pdfControllerEjs.js';
 import viewPdfController from "./controllers/viewPdfController.js";
 
-
 router.post("/signin", signIn);
 router.post("/register", register)
-router.post("/billdetails", billdetailsController);
-router.get("/viewBillList", viewBillListController);
-router.get("/generatePdf/:id", pdfControllerEjs)
-router.get("/viewPdf/:id", viewPdfController)
+router.post("/bills/create", billdetailsController);
+router.get("/bills/:id/download", pdfControllerEjs);
+router.get("/bills", viewBillListController);
+router.get("/bills/:id", viewPdfController);
 
 export default router;

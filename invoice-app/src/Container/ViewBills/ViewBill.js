@@ -27,7 +27,7 @@ export default function ViewBill() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`${api_url}viewBillList`);
+        const response = await axios.get(`${api_url}bills`);
         setData(response.data);
 
       } catch (error) {
@@ -40,11 +40,19 @@ export default function ViewBill() {
   }, []);
 
   // printing bill pdf from list
-  async function printPdf(invoiceNumber) {
-    await axios
-      .get(`${api_url}generatePdf/${invoiceNumber}`, { responseType: 'blob' })
+  async function printPdf(id, invoiceNumber) {
+    await axios.get(`${api_url}bills/${id}/download`, { responseType: 'blob' })
       .then(response => {
-        saveAs(response.data, `${invoiceNumber}.pdf`);
+
+        // const filename = response.headers;
+        console.log(response);
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${invoiceNumber}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+
 
       })
       .catch(error => {
@@ -55,11 +63,13 @@ export default function ViewBill() {
   }
   console.log(data);
   // view pdf from list 
-  async function handleViewBill(invoiceNumber) {
-    console.log(invoiceNumber);
+  async function handleViewBill(id) {
     try {
-      const response = await axios.get(`${api_url}viewPdf/${invoiceNumber}`, { responseType: 'blob' });
+      const response = await axios.get(`${api_url}bills/${id}`, { responseType: 'blob' });
+      console.log(response);
       const file = new Blob([response.data], { type: 'application/pdf' });
+      console.log(file);
+
       const fileURL = URL.createObjectURL(file);
       setUrl(fileURL);
       console.log(fileURL);
@@ -124,8 +134,8 @@ export default function ViewBill() {
 
                 <Grid item xs={6} md={3} mt={3}>
                   <CardActions>
-                    <Button size="small" onClick={() => printPdf(item.invoiceNumber)} ><FcDownload size={23} color="#FFB6C1" title="download" /></Button>
-                    <Button size="small" onClick={() => handleViewBill(item.invoiceNumber)}><IoMdEye size={25} color="#00a39f" title="view" /></Button>
+                    <Button size="small" onClick={() => printPdf(item._id, item.invoiceNumber)} ><FcDownload size={23} color="#FFB6C1" title="download" /></Button>
+                    <Button size="small" onClick={() => handleViewBill(item._id)}><IoMdEye size={25} color="#00a39f" title="view" /></Button>
                   </CardActions>
                 </Grid>
               </Grid >

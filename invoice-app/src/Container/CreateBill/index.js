@@ -82,7 +82,7 @@ export default function NewCreateBill() {
 
         dispatch(billDetails(billData))
 
-        await axios.post(`${api_url}billdetails`,
+        await axios.post(`${api_url}bills/create`,
             billData, { responseType: 'blob' })
             .then((response) => {
                 console.log(response);
@@ -90,8 +90,6 @@ export default function NewCreateBill() {
                 navigate("/viewBills")
             })
             .catch(error => {
-                // Handle any errors
-                debugger;
                 console.error(error);
 
             });
