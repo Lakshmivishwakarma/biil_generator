@@ -12,7 +12,7 @@ import { MdAddCircleOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import {api_url} from "../../constants";
+import { api_url } from "../../constants";
 
 export default function ViewBill() {
   const navigate = useNavigate();
